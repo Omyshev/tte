@@ -1,41 +1,30 @@
-(function () {
-	'use strict'
-	// Lampa.Storage.set('webos_subs_params','{}');
+// Название расширения
+Lampa.Extensions.register('youtube_button', function() {
+    // Функция для создания кнопки
+    function createYouTubeButton() {
+        // Создаем элемент кнопки
+        const button = document.createElement('div');
+        button.innerHTML = 'YouTube'; // Текст на кнопке
+        button.style.position = 'fixed'; // Позиционируем кнопку
+        button.style.bottom = '20px'; // Отступ снизу
+        button.style.right = '20px'; // Отступ справа
+        button.style.backgroundColor = '#ff0000'; // Красный цвет, как у YouTube
+        button.style.color = '#ffffff'; // Белый текст
+        button.style.padding = '10px 20px'; // Отступы внутри кнопки
+        button.style.borderRadius = '5px'; // Закругленные углы
+        button.style.cursor = 'pointer'; // Курсор в виде указателя
+        button.style.zIndex = '9999'; // Чтобы кнопка была поверх других элементов
 
-	const PROXY_URL = 'http://109.107.190.231:8118' // Ваш прокси
+        // Добавляем обработчик события для кнопки
+        button.addEventListener('click', function() {
+            // Открываем YouTube в новом окне или вкладке
+            window.open('https://www.youtube.com', '_blank');
+        });
 
-	function openYoutube() {
-		let url = 'https://www.youtube.com'
-		let proxiedUrl = `${PROXY_URL}/${encodeURIComponent(url)}`
+        // Добавляем кнопку в тело документа
+        document.body.appendChild(button);
+    }
 
-		// Открываем YouTube через WebView Lampa или в браузере
-		Lampa.Platform.open(proxiedUrl)
-	}
-
-	function addYoutubeButton() {
-		let menu = Lampa.Start.menu() // Получаем главное меню
-
-		let youtubeButton = $(
-			'<li class="menu__item selector focus" data-action="youtube">'
-		)
-			.append(
-				'<div class="menu__ico"><img src="https://www.youtube.com/s/desktop/9b235b1d/img/favicon.ico"></div>'
-			)
-			.append('<div class="menu__text">YouTube</div>')
-
-		youtubeButton.on('hover:enter', function () {
-			openYoutube()
-		})
-
-		menu.append(youtubeButton) // Добавляем кнопку в меню
-	}
-
-	function init() {
-		console.log('YouTube Proxy Extension загружен!')
-		addYoutubeButton()
-	}
-
-	Lampa.Listener.follow('app', function (e) {
-		if (e.type === 'ready') init()
-	})
-})()
+    // Вызываем функцию создания кнопки после загрузки страницы
+    window.addEventListener('load', createYouTubeButton);
+});
