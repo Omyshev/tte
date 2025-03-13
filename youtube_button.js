@@ -4,11 +4,11 @@
     const PROXY_URL = "http://109.107.190.231:8118"; // Ваш прокси
 
     function openYoutube() {
-        let url = "https://www.youtube.com";
-        let proxiedUrl = `${PROXY_URL}/${encodeURIComponent(url)}`; // ✅ исправлено
+        // let url = "https://www.youtube.com";
+        // let proxiedUrl = `${PROXY_URL}/${encodeURIComponent(url)}`; // ✅ исправлено
 
-        // Открываем YouTube через WebView Lampa или в браузере
-        Lampa.Platform.open(proxiedUrl);
+        // // Открываем YouTube через WebView Lampa или в браузере
+        // Lampa.Platform.open(proxiedUrl);
     }
 
     function addYoutubeButton() {
